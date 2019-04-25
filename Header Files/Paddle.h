@@ -15,14 +15,23 @@ class Paddle{
 		//"movementKeys" pair that will contain the keys that will control the paddle, and how fast the paddle moves up and down.
 		Paddle(const sf::Vector2f &position, const sf::Vector2f &dimensions, const sf::Color &paddleColor, 
 			const movementKeys &upAndDownKeys, float ySpeed);
+
+		//function that allows the user to move their paddle by pressing the keys they assigned to it.
 		void move();
+
+		//include a function that will allows a paddle to move by itself, in accordance with the ball's y position subtracted by an
+		//"offset" that prevents the paddle from being perfect.
+		void cpuMove(float moveOffSet, float ballYSpeed);
 		void setPosition(const sf::Vector2f &position);
 		void increaseScore();
 		void drawPaddle(sf::RenderWindow &window);
+		void setScore(int newScore);
 		sf::Vector2f getPosition() const;
 		std::string getScore() const;
 		sf::Vector2f getSize() const;
 		movementKeys getUserKeys() const;
+
+		bool intersects(const sf::RectangleShape& ball) const;
 		
 		//return the y position of the bottom of the paddle
 		float getBottomEdge() const;
@@ -32,9 +41,7 @@ class Paddle{
 		float getRightEdge() const;
 
 		//checks the ball to see if it is between the top and bottom of the paddle
-		bool isBallInRange(const sf::RectangleShape &rect) const;
-
-		bool isBallInXRange(const sf::RectangleShape &rect) const;
+		bool isBallInRange(const sf::RectangleShape &ball) const;
 
 	private:
 
